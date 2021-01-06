@@ -1361,7 +1361,7 @@ export default {
 
     getMenu() {
       const ref = this.appendToBody ? this.$refs.portal.portalTarget : this
-      const $menu = ref.$refs.menu.$refs.menu
+      const $menu = ref.$refs.menu && ref.$refs.menu.$refs.menu
       return $menu && $menu.nodeName !== '#comment' ? $menu : null
     },
 
@@ -1377,6 +1377,7 @@ export default {
       if (this.menu.isOpen && scroll) {
         const scrollToOption = () => {
           const $menu = this.getMenu()
+          if (!$menu) return
           const $option = $menu.querySelector(`.vue-treeselect__option[data-id="${node.id}"]`)
           if ($option) scrollIntoView($menu, $option)
         }
